@@ -7,4 +7,7 @@
  $ git clone https://github.com/apprentamentors/SR-Project2.git
 ```
 
+## License
+
+URL Shortener Microservice is [MIT licensed](./LICENSE).
 https://tabby-chess.glitch.me/

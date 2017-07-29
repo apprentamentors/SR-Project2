@@ -13,36 +13,51 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.post("/validateURL", function(req, res){
+app.post("/new", function(req, res){
   var url = req.body.url;
-  var valid = /^(http|https):\/\/[^ "]+$/.test(url);
 
-  if(valid) {
-    var stripUrl = url.replace(/^(http|https):\/\/www\./, "");
+  validateHttp(url, res);
+  validateSite(url, res);
+  sendShortenUrl(url, res);
 
-    dns.lookup(stripUrl, function(err, address, family) {
-      if(address == undefined) {
-        res.json({
-          "error": "invalid site"
-        });
-      }
-      else {
-          var originalUrl = url;
-          var shortenUrl = generateShortenUrl();
-          res.json({
-            "original_url": url,
-            "shorten_url": shortenUrl
-          });
-      }
-    });
-  }
-  else {
-    res.json({
-      "error": "invalid URL"
-    });
-  }
 });
+var validateHttp = function(url, res) {
+    var isValid = /^(http|https):\/\/[^ "]+$/.test(url);
 
+    if(isValid) {
+      return;
+    }
+    else {
+      res.json({
+        "error": "invalid URL"
+      });
+    }
+};
+
+var validateSite = function(url, res) {
+  var stripUrl = url.replace(/^(http|https):\/\/www\./, "");
+  console.log(stripUrl);
+  /*console.log(stripUrl);
+  dns.lookup(stripUrl, function(err, address, family) {
+    if(address == undefined) {
+      res.json({
+        "error": "invalid site"
+      });
+    }
+    else {
+        return true;
+    }
+  });*/
+};
+var sendShortenUrl = function(url, res) {
+  var originalUrl = url;
+  var shortenUrl = generateShortenUrl();
+
+  res.json({
+    "original_url": originalUrl,
+    "shorten_url": shortenUrl
+  });
+};
 var generateRandomNumber = function() {
   return Math.floor(Math.random() * 10);
 };

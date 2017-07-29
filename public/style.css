@@ -1,0 +1,47 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  color: #fefefe;
+}
+
+#container {
+  width: 100%;
+  height: 900px;
+  font-family: brandon-grotesque,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: linear-gradient(0deg,rgba(163,41,0,0.6),rgba(214, 57, 0,0.6)),url("https://s-media-cache-ak0.pinimg.com/736x/c4/a7/a9/c4a7a911413810d79c197e3d20bb54de--large-computer-desk-computer-tables.jpg")  top center no-repeat;
+  background-size: cover;
+  padding-top: 10%;
+
+}
+h1 {
+  font-size: 32px;
+  text-align: center;
+}
+button {
+  background-color:  #3b9cf7;
+  border: none;
+  color: #FEFEFF;
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+}
+input {
+  width: 570px;
+  height: 50px;
+  padding-left: 10px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #a3aaae;
+}
+input:focus {
+  border: 2px solid #3b9cf7;
+  background-color: #e5f2ff;
+  color: #3b9cf7;
+
+}
+
+form {
+  margin-top: 5%;
+  margin-left: 27%;
+}

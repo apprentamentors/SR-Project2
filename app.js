@@ -1,6 +1,6 @@
 var App = function() {
-  this.checkStringEmpty = function() {
-    
+  this.checkValidUrl = function() {
+    console.log("Hello");
   }
   this.generateRandomNumber = function() {
     return Math.floor(Math.random() * 10);
@@ -8,8 +8,8 @@ var App = function() {
   this.generateRandomLetter = function() {
     var letters = "abcdefghijklmnopqrstuvwxyz";
     var number = Math.floor(Math.random() * 26);
-    return letters[number];
 
+    return letters[number];
   },
   this.generateRandomSymbol = function() {
     var symbols = "~!@#$%^&*()+?<>";
@@ -25,6 +25,7 @@ var App = function() {
       hash += this.generateRandomLetter();
       hash += this.generateRandomSymbol();
     }
+
     return hash;
   }
 }

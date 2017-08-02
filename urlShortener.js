@@ -1,5 +1,6 @@
 var dns = require("dns");
 var generateUrl = require("./generateUrl");
+var databaseInterface = require("./databaseInterface");
 
 var exports = module.exports = {
   validateHttp: function(url, res) {
@@ -16,25 +17,47 @@ var exports = module.exports = {
   },
   validateSite: function(url, res) {
     var stripUrl = url.replace(/^(http|https):\/\/www\./, "");
-    /*console.log(stripUrl);
+
     dns.lookup(stripUrl, function(err, address, family) {
-      if(address == undefined) {
+      if(err) {
         res.json({
           "error": "invalid site"
         });
       }
       else {
-          return true;
+        return;
       }
-    });*/
+    });
   },
   sendShortenUrl: function(url, res) {
     var originalUrl = url;
-    var shortenUrl = generateUrl.generateShortenUrl();
+    databaseInterface.retrieveUrlData();
 
-    res.json({
+    /*res.json({
       "original_url": originalUrl,
       "shorten_url": shortenUrl
-    });
+    });*/
   }
 };
+
+/* function createNewUrl(results, url) {
+
+  console.log("createNewUrl");
+  if(results == 0) {
+    var shorten_url = generateUrl.generateShortenUrl();
+
+    var hash = {
+      original_url: url,
+      shorten_url: shorten_url
+    };
+    db.collection("urls").save(hash);
+
+
+    res.json(hash);
+  }
+  else {
+    console.log("There are " + results + " duplicates");
+
+  }
+}
+*/

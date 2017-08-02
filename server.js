@@ -1,23 +1,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var MongoClient = require("mongodb").MongoClient;
+var databaseInterface = require("./databaseInterface");
 var urlShortener = require("./urlShortener");
-var retrieveData = require("./retrieveData");
+var generateUrl = require("./generateUrl");
 
 var app = express();
+var port = process.env.PORT || 3002;
 
-var port = process.env.PORT || 3000;
-
-var db;
-var databaseUrl = "mongodb://localhost:27017/urlShortener";
-MongoClient.connect(databaseUrl, function(err, database) {
-  console.log("Connected successfully to server");
-  db = database;
-  db
-});
-
-app.use(bodyParser());
+databaseInterface.connectDatabase();
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser());
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
@@ -29,15 +21,7 @@ app.post("/new", function(req, res){
   urlShortener.validateHttp(url, res);
   urlShortener.validateSite(url, res);
 
-  db.collection("urls").find({}, { "original_url.http://www.google.com"}
-)
-  var hash = {
-    originalUrl: url,
-    shortenUrl: url + " ?"
-  }
-  db.collection("urls").insert(hash);
-
-  urlShortener.sendShortenUrl(url, res);
+//  databaseInterface.checkDuplicateUrl(url, res);
 });
 app.listen(port, function() {
   console.log("Node.js listening on http://localhost:" + port);

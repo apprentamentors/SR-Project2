@@ -1,7 +1,7 @@
 var exports = module.exports = {
   generateRandomSymbol:  function() {
-    var symbols = "~!@#$%^&*()+?<>";
-    var number = Math.floor(Math.random() * 15);
+    var symbols = "~!@#$^&*()+?<>";
+    var number = Math.floor(Math.random() * 14);
 
     return symbols[number];
   },
@@ -27,7 +27,7 @@ var exports = module.exports = {
  },
  generateShortenUrl: function() {
    var hash = this.generateRandomHash();
-   var url = "https://tabby-chess.glitch.me/";
+   var url = "http://localhost:3002/api/";
    var shortenUrl = url + hash;
 
    return shortenUrl;
